@@ -6,7 +6,7 @@
 
 <h2>About</h2>
 The program allows you sort images by color on a disk/folder
-<p><a href="https://en.wikipedia.org/wiki/Steganography">Steganography on wiki</a></p>
+
 
 
 <h2>License</h2>
