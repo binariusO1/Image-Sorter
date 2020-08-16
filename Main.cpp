@@ -25,8 +25,13 @@ int main()
 {
 	//Steganography stegObj;
 	//app_WindowCoding(stegObj);
-	SortingByColor obj;
 
 	string folderName = "images";
-	obj.listFiles(folderName);
+	SortingByColor obj(folderName);
+	//obj.showFileName(true);
+	obj.sortByBiggestColor(0,128,255,30,false);
+	obj.showImagesMap();
+	//obj.showFileNameRGB();
+	
+
 }
