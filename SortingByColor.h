@@ -18,12 +18,6 @@ using namespace std;
 
 class SortingByColor : protected Steganography
 {
-private:
-	struct Image
-	{
-		cv::Mat map;
-		string imagePath;
-	};
 public:
 	SortingByColor(const string& folder)
 	{
@@ -49,8 +43,8 @@ protected:
 
 	bool checkExtension(const string& filename);
 private:
-	map<string, int> imagesMap;
-	std::multimap<int, std::string> multimap;
+	map<string, double> imagesMap;
+	multimap<double, string> multimap;
 	int R;
 	int G;
 	int B;

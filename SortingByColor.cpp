@@ -15,6 +15,7 @@ void SortingByColor::sortByBiggestColor(const int&r, const  int&g, const int&b, 
 }
 
 void SortingByColor::sortingByBiggest() {
+    cout << "processing... " << endl;
     for (auto x : this->imagesMap) {
 
         cv::String filename(x.first);
@@ -22,9 +23,11 @@ void SortingByColor::sortingByBiggest() {
 
         int temp_rows = fileMat.rows;
         int temp_cols = fileMat.cols;
-        int sumValue = 0;
+        double pixel = static_cast<double>(1 / (double)(temp_rows * temp_cols));
+        //cout << pixel << endl;
+        double sumValue = 0;
         int cR, cB, cG, rR,rB,rG,sR,sG,sB;
-        for (int i = 0; i < static_cast<int>(temp_rows); i++)	//y
+        for (int i = 0; i <static_cast<int>(temp_rows); i++)	//y
         {
             for (int j = 0; j < static_cast<int>(temp_cols); j++)	//x
             {
@@ -44,21 +47,21 @@ void SortingByColor::sortingByBiggest() {
 
                 if (sR != -1 && sB != -1 && sG != -1)
                 {
-                    sumValue += (sR + sB + sG);
+                    sumValue += static_cast<double>(sR + sB + sG)*pixel*100;
                 }
-                //cout << " "<<sumValue;
+               //cout << " "<<sumValue;
                 //cout << endl;
 
             }
         }
         imagesMap[filename] = sumValue;
         if (this->isshowFileName) {
-            showFileNameP(x.first);
-            cout << "Value of color: " << sumValue << endl;
+            //showFileNameP(x.first);
+            //cout << "Value of color: " << sumValue << endl;
         }
 
     }
-    invertMap<string,int>();
+    invertMap<string, double>();
 
 
 
@@ -218,39 +221,36 @@ void SortingByColor::showImagesMap()
 template<typename K, typename V>
 void SortingByColor::invertMap()
 {
-    std::multimap<V, K, greater <int> > multimap;
+    cout << "copying... " << endl;
+    std::multimap<V, K, greater <double> > multimap;
 
     for (auto const& pair : this->imagesMap) {
         multimap.insert(std::make_pair(pair.second, pair.first));
     }
+    int j = 1;
     for (auto const& pair : multimap) {
-        std::cout << '{' << pair.first << "," << pair.second << '}' << '\n';
+       std::cout << j << ") "<<'{' << pair.first << "," << pair.second << '}' << '\n';
+       j++;
     }
 
     this->imagesMap.clear();
-    int digits = 0;
-
-    string zeros;
-    int i = 1;
 
     string new_folder;
+    int i = 1;
+
     new_folder = this->path + "\\" + "sort";
+
+    
     if (fs::exists(new_folder))
     {
         std::uintmax_t n = fs::remove_all(new_folder);
         std::cout << "Deleted " << n << " files or directories\n";
     }
     fs::create_directories(new_folder);
-
+    
+    cout << "enter to loop: " << endl;
     for (auto const& pair : multimap)
     {
-        size_t size = multimap.size();
-        if (size < 0) digits = 1;
-        while (size) {
-            size /= 10;
-            zeros += "0";
-        }
-
         std::size_t found;
         string path,old_path;
         old_path = pair.second;
@@ -259,7 +259,7 @@ void SortingByColor::invertMap()
         {
 
             string path(old_path.begin(), old_path.begin() + found +1);
-            string newFilename = new_folder + "\\" + "image" + zeros + to_string(i);
+            string newFilename = new_folder + "\\" + "image" + to_string(i);
             this->imagesMap.insert(std::make_pair(newFilename, pair.first));
 
             std::size_t found;
@@ -269,15 +269,13 @@ void SortingByColor::invertMap()
             cout << pair.second << "  na:  " << newFilename  + extenstion << endl;
             fs::copy(pair.second, newFilename + extenstion);
         }
-        zeros.clear();
         i++;
-
-        //fs::rename(path / "sort/" +"file1.txt", p / "to/file2.txt"); // OK
+        cout << "next" << endl;
     }
 
-    for (auto const& pair : this->imagesMap) {
-        std::cout << '{' << pair.first << "," << pair.second << '}' << '\n';
-    }
+    //for (auto const& pair : this->imagesMap) {
+    //    std::cout << '{' << pair.first << "," << pair.second << '}' << '\n';
+   // }
 
 
 }

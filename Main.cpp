@@ -29,7 +29,7 @@ int main()
 	string folderName = "images";
 	SortingByColor obj(folderName);
 	//obj.showFileName(true);
-	obj.sortByBiggestColor(0,128,255,30,false);
+	obj.sortByBiggestColor(68,108,11,40,true);
 	obj.showImagesMap();
 	//obj.showFileNameRGB();
 	
