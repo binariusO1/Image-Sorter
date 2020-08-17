@@ -6,12 +6,13 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-void SortingByColor::sortByBiggestColor(const int& mul , const double& per , const int& ra, const bool& showNames, const color& c1, const color& c2, const color& c3, const color& c4)
+void SortingByColor::sortByBiggestColor(const int& mul , const double& per , const int& ra, const bool& showNames, const color& c1, const color& c2, const color& c3, const color& c4, const color& c5)
 {
     this->col[0] = c1;
     this->col[1] = c2;
     this->col[2] = c3;
     this->col[3] = c4;
+    this->col[4] = c5;
     this->RANGE = ra;
     this->PERCENT = per;
     this->MULTIPLE = mul;
@@ -43,10 +44,11 @@ void SortingByColor::sortingByBiggest() {
             int cR, cB, cG, rR, rB, rG;
 
             int k = 1;
-            if (col[1].R != 256)
-                k += 1;
-            if (col[2].R != 256)
-                k += 1;
+            for (unsigned i = 1; i < 5; i++)
+            {
+                if (col[i].R != 256)
+                    k += 1;
+            }
 
             int raR = 1,raB=1,raG=1;
 
@@ -57,11 +59,20 @@ void SortingByColor::sortingByBiggest() {
             while (k--)
             {
                 if (col[k].R > 200)
-                    raR = 2;
+                    if (col[k].R > 230)
+                    raR = 4;
+                    else
+                    raR = 3;
                 if (col[k].G > 200)
-                    raG = 2;
+                    if (col[k].G > 230)
+                        raG = 4;
+                    else
+                        raG = 3;
                 if (col[k].B > 200)
-                    raG = 2;
+                    if (col[k].B > 230)
+                        raB = 4;
+                    else
+                        raB = 3;
 
                 for (unsigned i = 0; i < temp_rows; i = i + div)	//y
                 {

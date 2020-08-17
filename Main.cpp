@@ -35,7 +35,7 @@ int main()
 		SortingByColor obj(folderName);
 		//obj.showFileName(true);
 
-		color color[4] = { 256,256,256 };
+		color color[5] = { 256,256,256 };
 		int num = 1;
 		cout << "number of colors: " << endl;
 		cin >> num;
@@ -51,7 +51,7 @@ int main()
 		cout << "Percent good (0-100) [optimum 0.1]: " << endl;
 		double per = 0;
 		cin >> per;
-		cout << "Multiple (lower-faster | 0 - most accurate and slowest) [optimum 1000000]: " << endl;
+		cout << "Multiple (lower-faster | 0 - most accurate and slowest) [optimum 1 000 000]: " << endl;
 		int mul = 0;
 		cin >> mul;
 		obj.sortByBiggestColor(mul,per,range, true, color[0], color[1], color[2], color[3]);

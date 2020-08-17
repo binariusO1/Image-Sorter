@@ -38,7 +38,7 @@ public:
 
 	void sortByClosestColor(const string& folder);
 
-	void sortByBiggestColor(const int& mul, const double& per, const int& ra, const bool& showNames, const color& c1, const color& c2 = { 256,256,256 }, const color& c3 = { 256,256,256 }, const color& c4 = { 256,256,256 });
+	void sortByBiggestColor(const int& mul, const double& per, const int& ra, const bool& showNames, const color& c1, const color& c2 = { 256,256,256 }, const color& c3 = { 256,256,256 }, const color& c4 = { 256,256,256 }, const color& c5 = { 256,256,256 });
 
 	void showImagesMap();
 
@@ -60,7 +60,7 @@ private:
 	double PERCENT;
 	bool isshowFileName = false;
 	string path,folderName;
-	color col[4];
+	color col[5];
 
 	void listFiles(const string& folder);
 	template<typename K, typename V>
