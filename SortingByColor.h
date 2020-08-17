@@ -15,12 +15,19 @@
 
 using namespace std;
 //using namespace cv;
+struct color
+{
+	int R;
+	int G;
+	int B;
+};
 
 class SortingByColor : protected Steganography
 {
 public:
 	SortingByColor(const string& folder)
 	{
+		this->folderName = folder;
 		listFiles(folder);
 
 	}
@@ -28,10 +35,10 @@ public:
 
 public:
 	void showFileName(const bool& state);
-	//show files in 'name' folder
+
 	void sortByClosestColor(const string& folder);
-	//show files in 'name' folder
-	void sortByBiggestColor( const int& r, const  int& g, const int& b, const int& ra,const bool&showNames);
+
+	void sortByBiggestColor(const int& mul, const double& per, const int& ra, const bool& showNames, const color& c1, const color& c2 = { 256,256,256 }, const color& c3 = { 256,256,256 }, const color& c4 = { 256,256,256 });
 
 	void showImagesMap();
 
@@ -49,9 +56,11 @@ private:
 	int G;
 	int B;
 	int RANGE;
+	int MULTIPLE;
+	double PERCENT;
 	bool isshowFileName = false;
-	string path;
-
+	string path,folderName;
+	color col[4];
 
 	void listFiles(const string& folder);
 	template<typename K, typename V>
@@ -64,6 +73,7 @@ private:
 	void getMapRGB(const string& name);
 
 	//unique_ptr<Image> uni = make_unique<Image>();
-
 };
+
+
 

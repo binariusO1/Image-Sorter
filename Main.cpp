@@ -23,15 +23,42 @@ using namespace std;
 [STAThread]
 int main()
 {
-	//Steganography stegObj;
-	//app_WindowCoding(stegObj);
+	while (true)
+	{
+		//Steganography stegObj;
+//app_WindowCoding(stegObj);
+		string folderName;
+		//cin >> folderName;
+		folderName = "images";
+		if (!folderName.empty())
+			folderName = "\\" + folderName;
+		SortingByColor obj(folderName);
+		//obj.showFileName(true);
 
-	string folderName = "images";
-	SortingByColor obj(folderName);
-	//obj.showFileName(true);
-	obj.sortByBiggestColor(68,108,11,40,true);
-	obj.showImagesMap();
-	//obj.showFileNameRGB();
+		color color[4] = { 256,256,256 };
+		int num = 1;
+		cout << "number of colors: " << endl;
+		cin >> num;
+		for (size_t i = 0; i < num; i++)
+		{
+			cout << "color" << i + 1 << ":" << endl;
+			cin >> color[i].R >> color[i].G >> color[i].B;
+		}
+		cout << "Range (0-255): " << endl;
+		int range = 0;
+		cin >> range;
+		//1 kolor range ~30, 2 kolory range 10-15
+		cout << "Percent good (0-100) [optimum 0.1]: " << endl;
+		double per = 0;
+		cin >> per;
+		cout << "Multiple (lower-faster | 0 - most accurate and slowest) [optimum 1000000]: " << endl;
+		int mul = 0;
+		cin >> mul;
+		obj.sortByBiggestColor(mul,per,range, true, color[0], color[1], color[2], color[3]);
+		//obj.showImagesMap();
+		//obj.showFileNameRGB();
+	}
+
 	
 
 }
