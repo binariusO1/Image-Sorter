@@ -9,6 +9,9 @@
 #include "Steganography.h"					//for inherit
 #include <map>
 #include <filesystem> //C++ 17
+
+//My Library for OpenCV
+#include "filestream.h"
 //
 // KISS, DRY, YAGNI, TDA
 // SOLID
@@ -27,7 +30,7 @@ class SortingByColor : protected Steganography
 public:
 	SortingByColor(const string& folder)
 	{
-		this->folderName = folder;
+		this->work.addFolderName(folder);
 		listFiles(folder);
 
 	}
@@ -46,10 +49,9 @@ public:
 	void showFileNameRGB();
 
 protected:
-	list<string> extenstionList = { "BMP", "JPEG", "JPG", "PNG" };
 
-	bool checkExtension(const string& filename);
 private:
+	filestream work;						//object from filestream - hold actual work path, files name etc.
 	map<string, double> imagesMap;
 	multimap<double, string> multimap;
 	int R;
@@ -59,13 +61,14 @@ private:
 	int MULTIPLE;
 	double PERCENT;
 	bool isshowFileName = false;
-	string path,folderName;
+
 	color col[5];
 
 	void listFiles(const string& folder);
 	template<typename K, typename V>
 	void invertMap();
 	void sortingByBiggest();
+	//unused
 	void showFileNameP(const string& filename);
 
 	//
